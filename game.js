@@ -6,6 +6,7 @@ const btnLeft = document.getElementById('left');
 const btnRight = document.getElementById('right');
 const spanLives = document.getElementById('lives');
 const spanTime = document.getElementById('time');
+const spanRecord = document.getElementById('record');
 const playerPosition = {
     x: undefined,
     y: undefined,
@@ -41,8 +42,10 @@ function setCanvasSize() {
     canvas.setAttribute('width', canvasSize);
     canvas.setAttribute('height', canvasSize);
 
-    elementSize = canvasSize/10;
+    elementSize = Math.floor(canvasSize/10);
 
+    playerPosition.x = undefined;
+    playerPosition.y = undefined;
     startGame();
 }
 
@@ -68,6 +71,7 @@ function startGame() {
     if (!startTime) {
         startTime = Date.now();
         intervalTime = setInterval(showTime,100);
+        showRecord();
     }
 
     showLives();
@@ -99,7 +103,12 @@ function movePlayer() {
     const giftColisionY = playerPosition.y.toFixed(4) == giftPosition.y.toFixed(4);
     const giftColision = giftColisionX && giftColisionY;
 
-    if(giftColision) levelUp();  
+    if(giftColision) {
+        game.fillText(emojis['WIN'],playerPosition.x,playerPosition.y);
+        playerPosition.x = undefined;
+        playerPosition.y = undefined;
+        setTimeout(levelUp,300);
+    }
     
     const bombColision = bombsPositions.find(bomb =>{
         const bombColisionX = bomb.x.toFixed(4) == playerPosition.x.toFixed(4);
@@ -109,6 +118,8 @@ function movePlayer() {
 
     if(bombColision) {
         game.fillText(emojis['BOMB_COLLISION'],playerPosition.x+elementSize/2,playerPosition.y-elementSize/2);
+        playerPosition.x = undefined;
+        playerPosition.y = undefined;
         setTimeout(gameLost,300);
     }
 
@@ -122,7 +133,29 @@ function levelUp() {
 
 function gameWin() {
     clearInterval(intervalTime);
-    console.log('you win')
+    gameRecord();
+}
+
+function gameRecord() {
+    const recordTime = localStorage.getItem('record_time');
+    const playerTime =  Date.now() - startTime;
+    game.textAlign = 'center';
+    game.font = `${elementSize*0.9}px Verdana`;
+    game.fillStyle = 'white';
+    game.clearRect(0,0,canvasSize,canvasSize);
+    if(recordTime) {
+        if(recordTime >= playerTime) {
+            localStorage.setItem('record_time',playerTime);
+            game.fillText('New Record:',canvasSize/2,canvasSize/2-elementSize);
+            game.fillText(playerTime,canvasSize/2,canvasSize/2);
+        } else {
+            game.fillText('No new Record',canvasSize/2,canvasSize/2-elementSize);
+        };
+    } else {
+        localStorage.setItem('record_time',playerTime);
+        game.fillText('New record',canvasSize/2,canvasSize/2-elementSize);
+        game.fillText(playerTime,canvasSize/2,canvasSize/2);
+    };
 }
 
 function gameLost() {
@@ -130,7 +163,6 @@ function gameLost() {
    if(lives <= 0) {
     level = 0;
     lives = 3;
-    clearInterval(intervalTime);
     startTime = undefined;
    };
     playerPosition.x = undefined;
@@ -144,6 +176,10 @@ function showLives() {
 
 function showTime() {
     spanTime.innerHTML = Date.now() - startTime;
+}
+
+function showRecord() {
+    spanRecord.innerHTML = localStorage.getItem('record_time');
 }
 
 window.addEventListener('keydown', keyMovement)
