@@ -7,6 +7,8 @@ const btnRight = document.getElementById('right');
 const spanLives = document.getElementById('lives');
 const spanTime = document.getElementById('time');
 const spanRecord = document.getElementById('record');
+const btnReload = document.getElementById('refresh');
+const btnReset = document.getElementById('reset');
 const playerPosition = {
     x: undefined,
     y: undefined,
@@ -40,7 +42,7 @@ function setCanvasSize() {
         : canvasSize = wWidth * 0.8;
 
     canvas.setAttribute('width', canvasSize);
-    canvas.setAttribute('height', canvasSize);
+    canvas.setAttribute('height', canvasSize+10);
 
     elementSize = Math.floor(canvasSize/10);
 
@@ -61,7 +63,7 @@ function getMaps() {
 
 function startGame() {
     game.textAlign = 'end';
-    game.font = `${elementSize*0.9}px Verdana`;
+    game.font = `${elementSize*0.9}px Combo`;
     map = getMaps();
     if(!map) {
         gameWin();
@@ -75,12 +77,12 @@ function startGame() {
     }
 
     showLives();
-    game.clearRect(0,0,canvasSize,canvasSize);
+    game.clearRect(0,0,canvasSize,canvasSize+10);
     bombsPositions = [];
     map.forEach((row,rowIndex) => {
         row.forEach((col, colIndex) => {
-            const posX = elementSize * (colIndex+1);
-            const posY = elementSize * (rowIndex+1);
+            const posX = (elementSize) * (colIndex+1);
+            const posY = (elementSize) * (rowIndex+1);
 
             if(col == 'O' && !playerPosition.x && !playerPosition.y) {
                 playerPosition.x = posX;
@@ -88,7 +90,7 @@ function startGame() {
             } else if(col == 'I') {
                 giftPosition.x = posX;
                 giftPosition.y = posY;
-            } else if(col == 'X') {
+            } else if(col == 'X' || col == 'Y' || col == 'Z') {
                 bombsPositions.push({x:posX, y:posY});
             }
 
@@ -117,7 +119,7 @@ function movePlayer() {
     });
 
     if(bombColision) {
-        game.fillText(emojis['BOMB_COLLISION'],playerPosition.x+elementSize/2,playerPosition.y-elementSize/2);
+        game.fillText(emojis['BOMB_COLLISION'],playerPosition.x,playerPosition.y);
         playerPosition.x = undefined;
         playerPosition.y = undefined;
         setTimeout(gameLost,300);
@@ -140,21 +142,22 @@ function gameRecord() {
     const recordTime = localStorage.getItem('record_time');
     const playerTime =  Date.now() - startTime;
     game.textAlign = 'center';
-    game.font = `${elementSize*0.9}px Verdana`;
+    game.font = `${elementSize*0.9}px Combo`;
     game.fillStyle = 'white';
-    game.clearRect(0,0,canvasSize,canvasSize);
+    game.clearRect(0,0,canvasSize,canvasSize+10);
     if(recordTime) {
         if(recordTime >= playerTime) {
             localStorage.setItem('record_time',playerTime);
             game.fillText('New Record:',canvasSize/2,canvasSize/2-elementSize);
-            game.fillText(playerTime,canvasSize/2,canvasSize/2);
+            game.fillText(`${emojis['CUP']} ${playerTime}`,canvasSize/2,canvasSize/2);
         } else {
             game.fillText('No new Record',canvasSize/2,canvasSize/2-elementSize);
+            game.fillText(`TRY AGAIN!${emojis['GAME_OVER']}`,canvasSize/2,canvasSize/2);
         };
     } else {
         localStorage.setItem('record_time',playerTime);
         game.fillText('New record',canvasSize/2,canvasSize/2-elementSize);
-        game.fillText(playerTime,canvasSize/2,canvasSize/2);
+        game.fillText(`${emojis['CUP']} ${playerTime}`,canvasSize/2,canvasSize/2);
     };
 }
 
@@ -182,11 +185,20 @@ function showRecord() {
     spanRecord.innerHTML = localStorage.getItem('record_time');
 }
 
+function milisecToMinSec(time) {
+    let msToMinSec = undefined;
+    msToMinSec = String(new Date(time)).split(' ')[4].split(':');
+    msToMinSec.shift();
+    return msToMinSec.join(':');
+}
+
 window.addEventListener('keydown', keyMovement)
 btnUp.addEventListener('click',moveUp);
 btnDown.addEventListener('click',moveDown);
 btnRight.addEventListener('click',moveRight);
 btnLeft.addEventListener('click',moveLeft);
+btnReload.addEventListener('click', reloadGame);
+btnReset.addEventListener('click', resetGame);
 
 function keyMovement(event) {
     let key = event.key;
@@ -206,6 +218,15 @@ function keyMovement(event) {
             break;
     }
 };
+
+function reloadGame() {
+    location. reload();
+}
+
+function resetGame() {
+    localStorage.clear();
+    location.reload();
+}
 
 function moveUp() {
     if(playerPosition.y - elementSize > 0) {
