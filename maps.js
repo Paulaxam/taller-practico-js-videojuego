@@ -1,13 +1,16 @@
 const emojis = {
     '-':' ',
-    'O':'🚪',
-    'X':'💣',
-    'I':'🚩',
-    'PLAYER':'💀',
-    'BOMB_COLLISION':'💥',
+    'O':'🏕️',
+    'X':'🌵',
+    'Y':'🌲',
+    'Z':'🌳',
+    'I':'🏔️',
+    'PLAYER':'🚴🏼',
+    'BOMB_COLLISION':'🤕',
     'GAME_OVER':'👎',
-    'WIN':'🎆',
-    'HEART':'❤️',
+    'WIN':'😎',
+    'HEART':'💜',
+    'CUP':'🏆'
 };
 
 const maps=[];
@@ -50,3 +53,29 @@ maps.push(`
   XX-----OXX
   XXXXXXXXXX
 `);
+
+maps.push (`
+XXXXXXX--O
+XXXXXXX-XX
+XXXXXXX--X
+XXXXXXXX-X
+XX-------X
+XX-XXXXXXX
+XX-------X
+XXXXXXXX-X
+X--------X
+I-XXXXXXXX
+`)
+
+maps.push (`
+---YYYYYYY
+-Y----YYYY
+-YYYY-YYYY
+-YYYY-Y---
+OYYYY-Y-Y-
+YYYYY-Y-Y-
+Y-----Y-Y-
+Y-YYYYY-Y-
+Y-------YI
+YYYYYYYYYY
+`)
