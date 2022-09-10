@@ -4,7 +4,8 @@ const emojis = {
     'X':'🌵',
     'Y':'🌲',
     'Z':'🌳',
-    'I':'🏔️',
+    'I':'⛱️',
+    'F':'🏔️',
     'PLAYER':'🚴🏼',
     'BOMB_COLLISION':'🤕',
     'GAME_OVER':'👎',
@@ -76,6 +77,19 @@ OYYYY-Y-Y-
 YYYYY-Y-Y-
 Y-----Y-Y-
 Y-YYYYY-Y-
-Y-------YI
+Y-------YF
 YYYYYYYYYY
+`)
+
+maps.push (`
+OZ--------
+-Z--ZZZZZ-
+-Z--ZZZZZZ
+----ZZZZZF
+ZZZ-ZZZZZ-
+ZZZ-ZZZZZ-
+----ZZZZZ-
+--ZZZ-----
+Z-ZZZ--ZZZ
+Z-----ZZZZ
 `)
