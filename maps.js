@@ -29,6 +29,7 @@ maps.push(`
   OXXXXXXXXX
 `);
 
+
 maps.push(`
   O--XXXXXXX
   X--XXXXXXX
@@ -93,3 +94,57 @@ ZZZ-ZZZZZ-
 Z-ZZZ--ZZZ
 Z-----ZZZZ
 `)
+
+maps.push (`
+YYYYYYYYYY
+YYYYY----Y
+Y---Y-YY-Y
+Y-Y-Y-YY-Y
+Y-Y-YFYY-Y
+Y-Y-YYYY-Y
+Y-Y------Y
+Y-YYYYYYY-
+Y-YYYY---Y
+O------YYY
+`)
+
+maps.push (`
+---------O
+-YYYYYYYYY
+----------
+ZZZZZZZZZ-
+----------
+-YYYYYYYZZ
+----------
+YZYZYZYZY-
+----------
+FZZYYZZZZZ
+`)
+
+maps.push(`
+---XXXXXXX
+-X-XXXXXXX
+-X-XXXXXXX
+-X-XXXXXXX
+-X-X-O----
+-X-X-XXXX-
+-X---X----
+-XXXXX-XXX
+-X---X-XXX
+---X-FXXXX
+`)
+
+maps.push (`
+  O---------
+  XXXXXXXXX-
+  ---X----X-
+  -X-X-XX-X-
+  -X-X-IX-X-
+  -X-XXXX-X-
+  -X-XXXX-X-
+  -X------X-
+  -XXXXXXXX-
+  ----------
+`)
+
+
