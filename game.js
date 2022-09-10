@@ -87,7 +87,7 @@ function startGame() {
             if(col == 'O' && !playerPosition.x && !playerPosition.y) {
                 playerPosition.x = posX;
                 playerPosition.y = posY;
-            } else if(col == 'I') {
+            } else if(col == 'I' || col == 'F') {
                 giftPosition.x = posX;
                 giftPosition.y = posY;
             } else if(col == 'X' || col == 'Y' || col == 'Z') {
@@ -110,21 +110,21 @@ function movePlayer() {
         playerPosition.x = undefined;
         playerPosition.y = undefined;
         setTimeout(levelUp,300);
-    }
+    } else {
+        const bombColision = bombsPositions.find(bomb =>{
+            const bombColisionX = bomb.x.toFixed(4) == playerPosition.x.toFixed(4);
+            const bombColisionY = bomb.y.toFixed(4) == playerPosition.y.toFixed(4);
+            return bombColisionX && bombColisionY
+        });
+
+        if(bombColision) {
+            game.fillText(emojis['BOMB_COLLISION'],playerPosition.x,playerPosition.y);
+            playerPosition.x = undefined;
+            playerPosition.y = undefined;
+            setTimeout(gameLost,300);
+        }
     
-    const bombColision = bombsPositions.find(bomb =>{
-        const bombColisionX = bomb.x.toFixed(4) == playerPosition.x.toFixed(4);
-        const bombColisionY = bomb.y.toFixed(4) == playerPosition.y.toFixed(4);
-        return bombColisionX && bombColisionY
-    });
-
-    if(bombColision) {
-        game.fillText(emojis['BOMB_COLLISION'],playerPosition.x,playerPosition.y);
-        playerPosition.x = undefined;
-        playerPosition.y = undefined;
-        setTimeout(gameLost,300);
     }
-
     game.fillText(emojis['PLAYER'],playerPosition.x,playerPosition.y);
 }
 
@@ -174,7 +174,7 @@ function gameLost() {
 }
 
 function showLives() {
-    spanLives.innerHTML = Array(lives).fill(emojis['HEART']).join('');
+    spanLives.innerHTML = Array(lives).fill(emojis['HEART']).join(' ');
 }
 
 function showTime() {
@@ -187,7 +187,7 @@ function showRecord() {
 
 function milisecToMinSec(time) {
     let msToMinSec = undefined;
-    msToMinSec = String(new Date(time)).split(' ')[4].split(':');
+    msToMinSec = String(new Date(Number(time))).split(' ')[4].split(':');
     msToMinSec.shift();
     return msToMinSec.join(':');
 }
