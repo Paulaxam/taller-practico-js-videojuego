@@ -18,7 +18,7 @@ const giftPosition = {
     x: undefined,
     y: undefined,
 };
-const maxLevel = maps.length + 1;
+const maxLevel = maps.length;
 
 let bombsPositions = [];
 let canvasSize;
