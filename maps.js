@@ -29,31 +29,69 @@ maps.push(`
   OXXXXXXXXX
 `);
 
+maps.push (`
+I---------
+XX--------
+-X--------
+-X--------
+-X--------
+-X--------
+-XXXXXXX--
+----------
+O---------
+`)
 
 maps.push(`
-  O--XXXXXXX
-  X--XXXXXXX
-  XX----XXXX
-  X--XX-XXXX
-  X-XXX--XXX
-  X-XXXX-XXX
-  XX--XX--XX
-  XX--XXX-XX
-  XXXX---IXX
-  XXXXXXXXXX
-  `);
+O---------
+-Z--Z--ZZ-
+-Z--ZZ--ZZ
+----Z--ZZF
+ZZZ-ZZZZZ-
+-ZZ-Z--ZZ-
+----ZZZZZ-
+--ZZZ-----
+Z-Z-Z--ZZZ
+Z-----ZZ--
+`)
+
+
+maps.push(`
+O--XXXXXXX
+X--XXXXXXX
+XX----XXXX
+X--XX-XXXX
+X-XXX--XXX
+X-XXXX-XXX
+XX--XX--XX
+XX--XXX-XX
+XXXX---IXX
+XXXXXXXXXX
+`);
+
+maps.push (`
+---YY---YY
+-Y----YYYY
+-YYYY-YYYY
+--YYY-Y---
+O---Y-Y-Y-
+-YYYY-Y-Y-
+Y-----Y-Y-
+Y-YYYYY-Y-
+Y-------YF
+---YYY--YY
+`)
   
-  maps.push(`
-  I-----XXXX
-  XXXXX-XXXX
-  XX----XXXX
-  XX-XXXXXXX
-  XX-----XXX
-  XXXXXX-XXX
-  XX-----XXX
-  XX-XXXXXXX
-  XX-----OXX
-  XXXXXXXXXX
+maps.push(`
+I-----XXXX
+XXXXX-XXXX
+XX----XXXX
+XX-XXXXXXX
+XX-----XXX
+XXXXXX-XXX
+XX-----XXX
+XX-XXXXXXX
+XX-----OXX
+XXXXXXXXXX
 `);
 
 maps.push (`
