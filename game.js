@@ -7,6 +7,7 @@ const btnRight = document.getElementById('right');
 const spanLives = document.getElementById('lives');
 const spanTime = document.getElementById('time');
 const spanRecord = document.getElementById('record');
+const spanLevel = document.getElementById('level')
 const btnReload = document.getElementById('refresh');
 const btnReset = document.getElementById('reset');
 const playerPosition = {
@@ -76,6 +77,7 @@ function startGame() {
         showRecord();
     }
 
+    showLevel();
     showLives();
     game.clearRect(0,0,canvasSize,canvasSize+10);
     bombsPositions = [];
@@ -175,6 +177,10 @@ function gameLost() {
 
 function showLives() {
     spanLives.innerHTML = Array(lives).fill(emojis['HEART']).join(' ');
+}
+
+function showLevel() {
+    spanLevel.innerHTML = `${level + 1} / ${maxLevel}`;
 }
 
 function showTime() {
